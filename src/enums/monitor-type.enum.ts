@@ -1,0 +1,16 @@
+export enum MonitorType {
+  Anomaly = 'query alert',
+  Apm = 'query alert',
+  Composite = 'query alert',
+  Custom = 'service check',
+  Event = 'event alert',
+  Forecast = 'query alert',
+  Host = 'service check',
+  Integration = 'query alert',
+  LiveProcess = 'process alert',
+  Logs = 'log alert',
+  Metric = 'query alert',
+  Network = 'service check',
+  Outlier = 'query alert',
+  Process = 'service check',
+}
