@@ -1,0 +1,18 @@
+# Node files #
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS generated files #
+.DS_Store
+
+# Generated filed #
+dist/
+.tmp/
+test/coverage/
+test/config/globalConfig.json
+.rpt2_cache/
+sonar-project.properties
+
+# editor config #
+.vscode/settings.json

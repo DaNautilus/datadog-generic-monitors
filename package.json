@@ -1,0 +1,79 @@
+{
+  "name": "datadog-generic-monitors",
+  "version": "0.0.0",
+  "description": "Create Datadog monitors configuration",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "rollup -c",
+    "test": "set NODE_ENV=test&& jest --env=jsdom --coverage",
+    "lint": "tslint --project tsconfig.json --format stylish",
+    "prebuild": "npm run lint && rimraf dist && rimraf .tmp",
+    "postbuild": "npm run bundle && rimraf .tmp",
+    "bundle": "dts-bundle --name dist/index --main .tmp --outputAsModuleFolder",
+    "sonarconfig": "rimraf sonar-project.properties && node ./scripts/sonar-config.js"
+  },
+  "keywords": [
+    "kibana",
+    "typescript",
+    "generic",
+    "visualization",
+    "dashboard"
+  ],
+  "engines": {
+    "node": ">=8.x"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|ts|tsx)$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "<rootDir>/(node_modules|dist)"
+    ],
+    "coverageDirectory": "<rootDir>/test/coverage",
+    "collectCoverageFrom": [
+      "src/**/*.{t,j}s?(x)",
+      "!src/**/index.ts",
+      "!src/**/*.d.ts"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "ts",
+      "tsx"
+    ]
+  },
+  "sonar": {
+    "projectKey": "DaNautilus_kibana-generic-visualization",
+    "sources": "src",
+    "reportPaths": "test/coverage/lcov.info"
+  },
+  "contributors": [
+    {
+      "name": "Robert Kleger",
+      "email": "robert.kleger@bobb.io"
+    }
+  ],
+  "repository": "git+ssh://git@github.com:DaNautilus/kibana-generic-visualization.git",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/request": "^2.48.1",
+    "@types/uuid": "^3.4.4",
+    "dts-bundle": "^0.7.3",
+    "jest": "^24.5.0",
+    "rollup": "^1.6.0",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.3"
+  }
+}
