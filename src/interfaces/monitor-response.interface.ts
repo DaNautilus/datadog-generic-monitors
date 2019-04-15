@@ -1,7 +1,7 @@
 import { MonitorType } from '../enums/monitor-type.enum';
 import { IMonitorOptions } from './monitor-options.interface';
 
-export interface ICreateMonitorResponse {
+export interface IMonitorResponse {
   id: number;
   message: string;
   name: string;

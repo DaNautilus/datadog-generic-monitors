@@ -5,6 +5,8 @@ type TOptions = request.UrlOptions & request.CoreOptions;
 enum RequestMethodEnum {
   Get = 'GET',
   Post = 'POST',
+  Put = 'PUT',
+  Delete = 'DELETE',
 }
 
 interface IRestConfig {
@@ -45,6 +47,15 @@ export class Rest {
     };
 
     return this.sendRequest<T>(url, postOptions, query);
+  }
+
+  public delete<T>(url: string, query?: {}): Promise<T> {
+    const deleteOptions = {
+      ...this.globalOptions,
+      method: RequestMethodEnum.Delete,
+    };
+
+    return this.sendRequest<T>(url, deleteOptions, query);
   }
 
   private sendRequest<T>(url: string, options: TOptions, query?: {}): Promise<T> {
