@@ -1,3 +1,5 @@
+import { IThresholds } from './thresholds.interface';
+
 export interface IMonitorOptions {
   silenced?: {};
   notify_no_data?: boolean;
@@ -12,4 +14,5 @@ export interface IMonitorOptions {
   include_tags?: boolean;
   threshold_windows?: {};
   evaluation_delay?: number;
+  thresholds?: IThresholds;
 }
