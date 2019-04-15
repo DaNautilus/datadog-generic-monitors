@@ -1,7 +1,6 @@
 import { IMonitorConfig } from '../interfaces/monitor-config.interface';
 import { IDatabaseConfig } from './interfaces/database-config.interface';
-
-type TMonitorConfigFunction = (databaseConfig: IDatabaseConfig) => IMonitorConfig;
+import { TMonitorConfigFunction } from './types/monitor-config-function.type';
 
 export abstract class DatabaseMonitors {
   constructor(private databaseConfigs: IDatabaseConfig[]) { }

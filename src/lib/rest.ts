@@ -70,7 +70,7 @@ export class Rest {
         if (!error && response.statusCode >= 200 && response.statusCode < 300) {
           resolve(this.parseResponseBody(body));
         } else {
-          reject(error);
+          reject(error || this.parseResponseBody(body));
         }
       });
     });

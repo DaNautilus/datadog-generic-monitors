@@ -30,6 +30,12 @@ export class DatadogGenericMonitors {
     return this.rest.post<IMonitorResponse>(this.url, body);
   }
 
+  public createMonitors(configs: IMonitorConfig[]): Promise<IMonitorResponse[]> {
+    const promises = configs.map(config => this.createMonitor(config));
+
+    return Promise.all(promises);
+  }
+
   public deleteMonitor(monitorId: number): Promise<IDeleteMonitorResponse> {
     return this.rest.delete<IDeleteMonitorResponse>(`${this.url}/${monitorId}`);
   }
