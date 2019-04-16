@@ -14,6 +14,7 @@ export class RedisMonitorConfig extends DatabaseMonitors {
       this.getBlockedConnectionsConfig,
       this.getMasterLinkDownConfig,
       this.getFragmentationRatioConfig,
+      this.getConnectedSlavesConfig,
     ]);
   }
 
