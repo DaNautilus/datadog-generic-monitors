@@ -14,7 +14,6 @@ export class RedisMonitorConfig extends DatabaseMonitors {
       this.getBlockedConnectionsConfig,
       this.getMasterLinkDownConfig,
       this.getFragmentationRatioConfig,
-      this.getCacheHitRateConfig,
     ]);
   }
 
@@ -86,19 +85,16 @@ export class RedisMonitorConfig extends DatabaseMonitors {
     };
   }
 
-  private getCacheHitRateConfig(databaseConfig: IDatabaseConfig): IMonitorConfig {
+  private getConnectedSlavesConfig(databaseConfig: IDatabaseConfig): IMonitorConfig {
     return {
       type: MonitorType.Metric,
-      // tslint:disable-next-line: max-line-length
-      query: `avg(last_5m):( avg:redis.stats.keyspace_hits{${this.getIdentificationTags(databaseConfig)}} / ( avg:redis.stats.keyspace_hits{${this.getIdentificationTags(databaseConfig)}} + avg:redis.stats.keyspace_misses{${this.getIdentificationTags(databaseConfig)}} ) ) * 100 < 76`,
-      name: `Redis ${databaseConfig.name} cache hit rate`,
-      // tslint:disable-next-line: max-line-length
-      message: `{{#is_alert}}##Alert{{/is_alert}}\n{{#is_warning}}##Warning{{/is_warning}}\n\nCache hit rate for Redis service \`${databaseConfig.name}\` is {{comparator}} {{threshold}}`,
+      query: `change(avg(last_5m),last_5m):sum:redis.net.slaves{${this.getIdentificationTags(databaseConfig)}} > 1`,
+      name: `Redis ${databaseConfig.name} connected slaves`,
+      message: `{{#is_alert}}##Alert{{/is_alert}}\n\nRedis service ${databaseConfig.name} lost {{comparator}} {{threshold}} slaves.`,
       options: {
         include_tags: true,
         thresholds: {
-          critical: 76,
-          warning: 100,
+          critical: 1,
         },
       },
       tags: [],
