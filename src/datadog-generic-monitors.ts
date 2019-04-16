@@ -20,6 +20,10 @@ export class DatadogGenericMonitors {
     });
   }
 
+  public getMonitorById(monitorId: number): Promise<IMonitorResponse> {
+    return this.rest.get<IMonitorResponse>(`${this.url}/${monitorId}`);
+  }
+
   public getAllMonitors(): Promise<IMonitorResponse[]> {
     return this.rest.get<IMonitorResponse[]>(this.url);
   }
@@ -36,13 +40,13 @@ export class DatadogGenericMonitors {
     return Promise.all(promises);
   }
 
-  public deleteMonitor(monitorId: number): Promise<IDeleteMonitorResponse> {
+  public deleteMonitorById(monitorId: number): Promise<IDeleteMonitorResponse> {
     return this.rest.delete<IDeleteMonitorResponse>(`${this.url}/${monitorId}`);
   }
 
   public async deleteAllMonitors(): Promise<IDeleteMonitorResponse[]> {
     const monitors = await this.getAllMonitors();
-    const promises = monitors.map(monitor => this.deleteMonitor(monitor.id));
+    const promises = monitors.map(monitor => this.deleteMonitorById(monitor.id));
 
     return Promise.all(promises);
   }
