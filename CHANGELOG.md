@@ -2,6 +2,12 @@
 
 ## [0.0.2] - 2019-04-16
 
+### Fixed
+
+- `Redis` Monitor for `connected slaves changed` not added to Datadog.
+
+## [0.0.2] - 2019-04-16
+
 ### Added
 
 - Create `connected slaves changed` `monitor` for `Redis`
