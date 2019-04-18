@@ -1,8 +1,10 @@
-import { MonitorType } from './enums/monitor-type.enum';
 import {
     IDatadogGenericMonitorsConfig
 } from './interfaces/datadog-generic-monitors-config.interface';
 import { IDeleteMonitorResponse } from './interfaces/delete-monitor-response.interface';
+import {
+    IMonitorConfigAndAlertRecipients
+} from './interfaces/monitor-config-and-alert-recipients.interface';
 import { IMonitorConfig } from './interfaces/monitor-config.interface';
 import { IMonitorResponse } from './interfaces/monitor-response.interface';
 import { Rest } from './lib/rest';
@@ -28,13 +30,13 @@ export class DatadogGenericMonitors {
     return this.rest.get<IMonitorResponse[]>(this.url);
   }
 
-  public createMonitor(config: IMonitorConfig): Promise<IMonitorResponse> {
-    const body = JSON.stringify(config);
+  public createMonitor(config: IMonitorConfigAndAlertRecipients): Promise<IMonitorResponse> {
+    const body = JSON.stringify(this.addAlertRecipientsToMonitorConfig(config));
 
     return this.rest.post<IMonitorResponse>(this.url, body);
   }
 
-  public createMonitors(configs: IMonitorConfig[]): Promise<IMonitorResponse[]> {
+  public createMonitors(configs: IMonitorConfigAndAlertRecipients[]): Promise<IMonitorResponse[]> {
     const promises = configs.map(config => this.createMonitor(config));
 
     return Promise.all(promises);
@@ -49,5 +51,18 @@ export class DatadogGenericMonitors {
     const promises = monitors.map(monitor => this.deleteMonitorById(monitor.id));
 
     return Promise.all(promises);
+  }
+
+  private addAlertRecipientsToMonitorConfig({ monitorConfig, alertRecipients }: IMonitorConfigAndAlertRecipients): IMonitorConfig {
+    const monitorConfigWithAlertRecipients = { ...monitorConfig };
+
+    if (alertRecipients && alertRecipients.length > 0) {
+      monitorConfigWithAlertRecipients.message = `${monitorConfigWithAlertRecipients.message}\n\n`;
+    }
+
+    alertRecipients.forEach(alertRecipient =>
+      monitorConfigWithAlertRecipients.message = `${monitorConfigWithAlertRecipients.message} @${alertRecipient}`);
+
+    return monitorConfigWithAlertRecipients;
   }
 }

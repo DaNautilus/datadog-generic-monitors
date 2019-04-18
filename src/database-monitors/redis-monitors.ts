@@ -25,7 +25,7 @@ export class RedisMonitorConfig extends DatabaseMonitors {
       query: `avg(last_15m):( avg:redis.stats.keyspace_hits{${this.getIdentificationTags(databaseConfig)}} / ( avg:redis.stats.keyspace_hits{${this.getIdentificationTags(databaseConfig)}} + avg:redis.stats.keyspace_misses{${this.getIdentificationTags(databaseConfig)}} ) ) * 100 < 75`,
       name: `Redis ${databaseConfig.name} key space hit rate`,
       // tslint:disable-next-line: max-line-length
-      message: `{{#is_alert}}##Alert{{/is_alert}} \n{{#is_warning}}##Warning{{/is_warning}} \n\nKey space hit rate for Redis service \`${databaseConfig.name}\` is {{comparator}} {{threshold}} .\n\n`,
+      message: `{{#is_alert}}##Alert{{/is_alert}} \n{{#is_warning}}##Warning{{/is_warning}} \n\nKey space hit rate for Redis service \`${databaseConfig.name}\` is {{comparator}} {{threshold}}.`,
       options: {
         include_tags: true,
         thresholds: {
