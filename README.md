@@ -16,6 +16,9 @@
   <a href="https://sonarcloud.io/dashboard/index/DaNautilus_datadog-generic-monitors">
     <img src="https://sonarcloud.io/api/project_badges/measure?project=DaNautilus_datadog-generic-monitors&metric=alert_status" alt="quality gate" />
   </a>
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/DaNautilus/datadog-generic-monitors.svg" alt="greenkeeper" />
+  </a>
 </p>
 
 ![divider](./divider.png)
