@@ -22,6 +22,8 @@
 
 ## ❯ Why
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/DaNautilus/datadog-generic-monitors.svg)](https://greenkeeper.io/)
+
 Generate Datadog Monitors dynamically.
 
 ![divider](./divider.png)
