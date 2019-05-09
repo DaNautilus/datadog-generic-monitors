@@ -51,7 +51,7 @@
     ]
   },
   "sonar": {
-    "projectKey": "DaNautilus_kibana-generic-visualization",
+    "projectKey": "DaNautilus_datadog-generic-monitors",
     "sources": "src",
     "reportPaths": "test/coverage/lcov.info"
   },
