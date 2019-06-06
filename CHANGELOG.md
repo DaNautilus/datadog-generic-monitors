@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.5] - 2019-06-06
+
+### General
+
+- Upgrade jest dependencies.
+- Upgrade rollup dependencies.
+- Upgrade typescript to version 3.5.1.
+
 ## [0.0.4] - 2019-04-18
 
 ### Added
